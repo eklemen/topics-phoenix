@@ -1,0 +1,15 @@
+<h6>
+    <%= link to: topic_path(@conn, :index) do %>
+        <i class="material-icons">chevron_left</i>
+        Go Back
+    <% end %>
+</h6>
+
+<%= form_for @changeset, topic_path(@conn, :update, @topic), fn f -> %>
+    <div class="form-group">
+        <%= text_input f, :title, placeholder: "Title", class: "form-control" %>
+        <%= error_tag f, :title %>
+    </div>
+
+    <%= submit "Save Topic", class: "btn btn-primary" %>
+<% end %>
