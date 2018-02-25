@@ -3,6 +3,8 @@ defmodule Discuss.TopicController do
 
   alias Discuss.Topic
 
+  plug Discuss.Plugs.RequireAuth when action in [:new, :create, :edit, :update, :delete]
+
   def index(conn, _params) do
     IO.inspect(conn.assigns)
     topics = Repo.all(Topic)
@@ -51,7 +53,7 @@ defmodule Discuss.TopicController do
     end
   end
 
-  def delete(conn, %{"id" => topic_id}) do
+  def delete(_conn, %{"id" => topic_id}) do
     Repo.get!(Topic, topic_id)
     |> Repo.delete!()
   end
